@@ -23,7 +23,12 @@
               <div class="row">
                 <div class="col-md-6 form-group" style="text-align: center">
                   <label for=""><b>Select the location: </b></label>
-                  <select name="" id="" class="selectpicker form-control">
+                  <select
+                    name=""
+                    id=""
+                    class="selectpicker form-control"
+                    required="1"
+                  >
                     {% for location in locations %}
                     <option value="{{location}}">{{location}}</option>
                     {% endfor %}
@@ -71,17 +76,33 @@
             </form>
             <br />
             <div class="col-md-12" style="text-align: center">
-              <h3><span class="prediction"></span></h3>
+              <h3><span id="prediction"> </span></h3>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+    <script>
+      function form_handler(event) {
+        event.preventDefault();
+      }
+      function send_data() {
+        document.querySelector("form").addEventListener("submit", form_handler);
+        var fd = new FormData(document.querySelector("form"));
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/predict", true);
+        document.getElementById("prediction").innerHTML =
+          "Wait! Predicting price...";
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == XMLHttpRequest.DONE) {
+            document.getElementById("prediction").innerHTML =
+              "Price: Rs. " + xhr.responseText;
+          }
+        };
+        xhr.onload = function () {};
+        xhr.send(fd);
+      }
+    </script>
   </body>
 </html>
