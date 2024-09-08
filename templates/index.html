@@ -14,10 +14,67 @@
   <body class="bg-dark">
     <div class="container">
       <div class="row">
-        <div
-          class="card"
-          style="width: 100%; height: 100%; margin-top: 50px"
-        ></div>
+        <div class="card" style="width: 100%; height: 100%; margin-top: 50px">
+          <div class="card-header" style="text-align: center">
+            <h1>Welcome to House Price Predictor</h1>
+          </div>
+          <div class="card-body">
+            <form method="post" accept-charset="utf-8">
+              <div class="row">
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label for=""><b>Select the location: </b></label>
+                  <select name="" id="" class="selectpicker form-control">
+                    {% for location in locations %}
+                    <option value="{{location}}">{{location}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label for=""><b>Number of BHK: </b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bhk"
+                    name="bhk"
+                    placeholder="Enter BHK"
+                  />
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label for=""><b>Number of Bathrooms: </b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="bath"
+                    name="bath"
+                    placeholder="Enter number of bathrooms"
+                  />
+                </div>
+                <div class="col-md-6 form-group" style="text-align: center">
+                  <label for=""><b>Total square feet: </b></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="total_sqft"
+                    name="total_sqft"
+                    placeholder="Enter total sqft"
+                  />
+                </div>
+                <div class="col-md-12 form-group" style="margin-top: 20px">
+                  <button
+                    class="btn btn-primary form-control"
+                    onclick="send_data()"
+                  >
+                    Predict Price
+                  </button>
+                </div>
+              </div>
+            </form>
+            <br />
+            <div class="col-md-12" style="text-align: center">
+              <h3><span class="prediction"></span></h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
